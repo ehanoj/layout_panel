@@ -22,13 +22,9 @@
  ***************************************************************************/
 """
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication, Qt
-from qgis.PyQt.QtGui import QIcon
-from qgis.PyQt.QtWidgets import QAction
+from qgis.PyQt.QtGui import QIcon, QAction
 from qgis.core import QgsMessageLog
 import time
-
-# Initialize Qt resources from file resources.py
-from .resources import *
 
 # Import the code for the DockWidget
 from .layout_panel_dockwidget import LayoutPanelDockWidget
@@ -175,7 +171,7 @@ class LayoutPanel:
         
         self.log("init")
         
-        icon_path = ':/plugins/layout_panel/icon.png'
+        icon_path = os.path.join(self.plugin_dir, 'icon.png')
         self.add_action(
             icon_path,
             text=self.tr(u'Layout Panel'),
@@ -186,7 +182,7 @@ class LayoutPanel:
             self.dockwidget = LayoutPanelDockWidget(self.iface, self.iface.mainWindow())
             
         self.dockwidget.closingPlugin.connect(self.onClosePlugin)
-        self.iface.addDockWidget(Qt.LeftDockWidgetArea, self.dockwidget)
+        self.iface.addDockWidget(Qt.DockWidgetArea.LeftDockWidgetArea, self.dockwidget)
               
 
     def onClosePlugin(self):
