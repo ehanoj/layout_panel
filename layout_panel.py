@@ -63,9 +63,6 @@ class LayoutPanel:
         # Declare instance attributes
         self.actions = []
         self.menu = self.tr(u'&Layout Panel')
-        # TODO: We are going to let the user set this up in a future iteration
-        self.toolbar = self.iface.addToolBar(u'LayoutPanel')
-        self.toolbar.setObjectName(u'LayoutPanel')
 
         #print "** INITIALIZING LayoutPanel"
 
@@ -155,7 +152,7 @@ class LayoutPanel:
             action.setWhatsThis(whats_this)
 
         if add_to_toolbar:
-            self.toolbar.addAction(action)
+            self.iface.addToolBarIcon(action)
 
         if add_to_menu:
             self.iface.addPluginToMenu(
@@ -196,8 +193,6 @@ class LayoutPanel:
                 self.tr(u'&Layout Panel'),
                 action)
             self.iface.removeToolBarIcon(action)
-        # remove the toolbar
-        del self.toolbar
 
 
     def run(self):
